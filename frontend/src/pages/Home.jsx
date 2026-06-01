@@ -1,41 +1,90 @@
-import React, { useEffect, useState } from 'react';
-import ProductCard from '../components/ProductCard';
+import React, { useEffect, useState } from "react";
+import ProductCard from "../components/ProductCard";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    (async () => {
       try {
-        const res = await fetch('/api/products');
+        const res = await fetch("/api/products");
+
+        if (!res.ok) throw new Error("Failed");
+
         const data = await res.json();
-        setProducts(data.slice(0, 4)); // Featured products
-      } catch (error) {
-        console.error(error);
+
+        setProducts(data.slice(0, 8));
+      } catch (err) {
+        console.error(err);
       } finally {
         setLoading(false);
       }
-    };
-    fetchProducts();
+    })();
   }, []);
 
   return (
     <div className="home-container">
-      <div className="hero-banner">
-        <h1>Welcome to ShopNest</h1>
-        <p>Discover the best products at unbeatable prices.</p>
-      </div>
-      <h2>Featured Products</h2>
-      {loading ? (
-        <div>Loading...</div>
-      ) : (
-        <div className="product-grid">
-          {products.map((product) => (
-            <ProductCard key={product._id} product={product} />
+
+      {/* HERO */}
+      <section className="hero-banner">
+
+        <h1 className="hero-title">
+          {"SHOPNEST".split("").map((letter, index) => (
+            <span key={index} className="hero-letter">
+              {letter}
+            </span>
           ))}
+        </h1>
+
+        <div className="hero-meta">
+
+          <span className="label">
+            / COLLECTION 26
+          </span>
+
+          <p>
+            Wear the silence. Minimal streetwear pieces
+            built for clean silhouettes, raw attitude,
+            and everyday confidence.
+          </p>
+
+          <Link to="/shop" className="btn">
+            Enter Shop →
+          </Link>
+
+          <span className="copy">
+            © {new Date().getFullYear()} SHOPNEST®
+          </span>
+
         </div>
-      )}
+
+      </section>
+
+      {/* DROPS */}
+      <section className="drops-section">
+
+        <div className="drops-header">
+          <h2>Selected / Drops</h2>
+        </div>
+
+        {loading ? (
+          <p className="label">Loading…</p>
+        ) : (
+          <div className="product-grid">
+            {products.map((p, i) => (
+              <ProductCard
+                key={p._id}
+                product={p}
+                index={i}
+              />
+            ))}
+          </div>
+        )}
+
+      </section>
+
     </div>
   );
 };

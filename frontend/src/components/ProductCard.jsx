@@ -1,17 +1,28 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import '../styles/product.css';
+import React from "react";
+import { Link } from "react-router-dom";
+import "../styles/product.css";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, index = 0 }) => {
+  const num = String(index + 1).padStart(2, "0");
   return (
-    <div className="product-card">
-      <img src={product.imageUrl} alt={product.name} className="product-image" />
-      <div className="product-info">
-        <h3>{product.name}</h3>
-        <p className="price">₹{product.price}</p>
-        <Link to={`/products/${product._id}`} className="btn">View Details</Link>
+    <Link to={`/products/${product._id}`} className="editorial-card">
+      <div className="editorial-img-wrap">
+        <img
+          src={product.imageUrl}
+          alt={product.name}
+          loading="lazy"
+          onError={(e) => { e.currentTarget.style.opacity = 0.3; }}
+        />
+        <span className="card-index">N° {num}</span>
       </div>
-    </div>
+      <div className="editorial-card-info">
+        <div>
+          <h3>{product.name}</h3>
+          <p>{product.category || "Premium Wear"}</p>
+        </div>
+        <strong>₹{Number(product.price).toLocaleString("en-IN")}</strong>
+      </div>
+    </Link>
   );
 };
 

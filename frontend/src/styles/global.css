@@ -1,94 +1,113 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Outfit', sans-serif;
+:root {
+  --bg: #0a0a0a;
+  --bg-elev: #111111;
+  --cream: #ebe6df;
+  --text: #ebe6df;
+  --muted: #8a8a8a;
+  --accent: #ff2b06;
+  --line: rgba(235, 230, 223, 0.12);
+  --display: 'Archivo Black', 'Inter', sans-serif;
+  --body: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
 }
 
-body {
-  background-color: #09090b;
-  color: #fafafa;
-  min-height: 100vh;
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--body);
+  -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
 
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+button { font-family: inherit; cursor: pointer; }
+
 .main-content {
   min-height: 85vh;
-  padding: 40px 20px;
-  max-width: 1400px;
+  padding: 0 40px 80px;
+  max-width: 1800px;
   margin: 0 auto;
-  animation: fadeIn 0.6s ease-in-out;
+  animation: fadeIn 0.5s ease;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-  transition: all 0.3s ease;
+/* ============ DISPLAY TYPE ============ */
+.display {
+  font-family: var(--display);
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+  line-height: 0.85;
+  color: var(--cream);
 }
 
-ul {
-  list-style: none;
-}
-
-/* Premium Buttons */
-.btn {
-  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
-  color: #fff;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 15px;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 14px rgba(234, 88, 12, 0.3);
-  display: inline-block;
-  text-align: center;
-}
-
-.btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(234, 88, 12, 0.5);
-  filter: brightness(1.1);
-}
-
-.btn:active {
-  transform: translateY(1px);
-}
-
-/* Base Headings */
 h1, h2, h3, h4 {
-  font-weight: 700;
-  letter-spacing: -0.5px;
-  margin-bottom: 20px;
+  font-family: var(--display);
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  font-weight: 400;
 }
 
-h2 {
-  font-size: 2.2rem;
-  background: linear-gradient(to right, #ffffff, #a1a1aa);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* ============ BUTTONS ============ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--cream);
+  color: var(--bg);
+  padding: 16px 28px;
+  border: none;
+  border-radius: 0;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.btn:hover { background: var(--accent); color: var(--cream); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--cream);
+  border: 1px solid var(--cream);
+}
+.btn-ghost:hover { background: var(--cream); color: var(--bg); }
+
+/* ============ LABEL / META TEXT ============ */
+.label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
-/* Smooth Fade In */
+/* ============ FADE ============ */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
+/* ============ SCROLLBAR ============ */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: #2a2a2a; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* ============ FOCUS A11Y ============ */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
-::-webkit-scrollbar-track {
-  background: #09090b; 
-}
-::-webkit-scrollbar-thumb {
-  background: #27272a; 
-  border-radius: 10px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #3f3f46; 
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
