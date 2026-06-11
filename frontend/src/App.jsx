@@ -21,6 +21,7 @@ import EditProduct from './admin/EditProduct';
 import AdminOrders from './admin/AdminOrders';
 import AdminUsers from './admin/AdminUsers';
 import { PageTransitionProvider } from "./components/PageTransition";
+import AnalyticsDashboard from "./admin/AnalyticsDashboard";
 
 function Layout() {
   const location = useLocation();
@@ -52,6 +53,7 @@ function Layout() {
           <Route path="/admin/edit-product/:id" element={<EditProduct />} />
           <Route path="/admin/orders" element={<AdminOrders />} />
           <Route path="/admin/users" element={<AdminUsers />} />
+          <Route path="/admin/analytics" element={<AnalyticsDashboard />} />
         </Routes>
       </div>
 
