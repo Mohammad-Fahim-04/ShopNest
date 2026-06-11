@@ -1,0 +1,105 @@
+/* ============ THEME SWITCHER ============ */
+
+.theme-switcher {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-left: 18px;
+    padding-left: 18px;
+    border-left: 1px solid var(--line);
+}
+
+/* ============ BUTTON ============ */
+
+.theme-btn {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: all 0.25s ease;
+    outline: none;
+}
+
+/* ============ COLOR CIRCLE ============ */
+
+.theme-circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--theme-color);
+    transition: all 0.25s ease;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* ============ REMOVE SHADOWS ============ */
+
+.theme-circle,
+.theme-btn.active .theme-circle,
+.theme-btn:hover .theme-circle,
+.theme-btn.active .theme-bg-ring,
+.theme-indicator,
+.theme-glow {
+    box-shadow: none !important;
+    filter: none !important;
+}
+
+/* ============ HOVER ============ */
+
+.theme-btn:hover {
+    transform: scale(1.08);
+}
+
+/* ============ ACTIVE BUTTON ============ */
+
+.theme-btn.active {
+    transform: scale(1.1);
+}
+
+.theme-btn.active .theme-circle {
+    border: 1.5px solid #fff;
+}
+
+/* ============ REMOVE EXTRA EFFECTS ============ */
+
+.theme-bg-ring,
+.theme-shine,
+.theme-glow {
+    display: none;
+}
+
+/* ============ SMALL INNER DOT ============ */
+
+.theme-indicator {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #fff;
+}
+
+/* ============ MOBILE ============ */
+
+@media (max-width: 768px) {
+    .theme-switcher {
+        gap: 10px;
+        margin-left: 12px;
+        padding-left: 12px;
+    }
+
+    .theme-btn {
+        width: 18px;
+        height: 18px;
+    }
+
+    .theme-circle {
+        width: 18px;
+        height: 18px;
+    }
+}

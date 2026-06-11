@@ -30,9 +30,13 @@ const Home = () => {
       {/* HERO */}
       <section className="hero-banner">
 
-        <h1 className="hero-title">
+        <h1 className="hero-title page-brand-reveal">
           {"SHOPNEST".split("").map((letter, index) => (
-            <span key={index} className="hero-letter">
+            <span
+              key={index}
+              className="hero-letter reveal-letter"
+              style={{ animationDelay: `${index * 0.08}s` }}
+            >
               {letter}
             </span>
           ))}

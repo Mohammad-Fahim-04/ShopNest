@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
+/* ============ DEFAULT THEME (BLACK) ============ */
 :root {
   --bg: #0a0a0a;
   --bg-elev: #111111;
@@ -13,19 +14,69 @@
   --mono: 'JetBrains Mono', monospace;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+/* ============ BLACK THEME ============ */
+body.theme-black {
+  --bg: #000000;
+  --bg-elev: #0d0d0d;
+  --text: #f2ebe4;
+  --accent: #f2ebe4;
+  --cream: #f2ebe4;
+  --muted: #7a7a7a;
+  --line: rgba(242, 235, 228, 0.08);
+}
 
-html, body {
+/* ============ CREAM THEME ============ */
+body.theme-cream {
+  --bg: #ebe3dc;
+  --bg-elev: #f5ede6;
+  --text: #000000;
+  --accent: #000000;
+  --cream: #000000;
+  --muted: #666666;
+  --line: rgba(0, 0, 0, 0.1);
+}
+
+/* ============ RED THEME ============ */
+body.theme-red {
+  --bg: #ebe3dc;
+  --bg-elev: #f5ede6;
+  --text: #ff1208;
+  --accent: #ff1208;
+  --cream: #ff1208;
+  --muted: #cc0a06;
+  --line: rgba(255, 18, 8, 0.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--body);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-a { text-decoration: none; color: inherit; }
-ul { list-style: none; }
-button { font-family: inherit; cursor: pointer; }
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
 
 .main-content {
   min-height: 85vh;
@@ -44,7 +95,10 @@ button { font-family: inherit; cursor: pointer; }
   color: var(--cream);
 }
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
   font-family: var(--display);
   text-transform: uppercase;
   letter-spacing: -0.03em;
@@ -69,14 +123,22 @@ h1, h2, h3, h4 {
   cursor: pointer;
   transition: background 0.25s ease, color 0.25s ease;
 }
-.btn:hover { background: var(--accent); color: var(--cream); }
+
+.btn:hover {
+  background: var(--accent);
+  color: var(--cream);
+}
 
 .btn-ghost {
   background: transparent;
   color: var(--cream);
   border: 1px solid var(--cream);
 }
-.btn-ghost:hover { background: var(--cream); color: var(--bg); }
+
+.btn-ghost:hover {
+  background: var(--cream);
+  color: var(--bg);
+}
 
 /* ============ LABEL / META TEXT ============ */
 .label {
@@ -89,15 +151,33 @@ h1, h2, h3, h4 {
 
 /* ============ FADE ============ */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ============ SCROLLBAR ============ */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: #2a2a2a; }
-::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2a2a2a;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
 
 /* ============ FOCUS A11Y ============ */
 :focus-visible {
@@ -106,7 +186,10 @@ h1, h2, h3, h4 {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
