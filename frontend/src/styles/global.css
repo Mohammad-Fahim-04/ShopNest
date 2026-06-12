@@ -78,6 +78,231 @@ button {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
+/* ============ COUPON SECTION ============ */
+
+.coupon-section {
+  margin: 20px 0;
+  padding: 16px;
+  border: 1px solid var(--line);
+  background: var(--bg-elev);
+}
+
+.coupon-section h4 {
+  margin-bottom: 12px;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.coupon-input-group {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.coupon-input-group input {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 14px;
+}
+
+.coupon-input-group input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.coupon-input-group button {
+  padding: 10px 20px;
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--text);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.coupon-input-group button:hover:not(:disabled) {
+  background: var(--text);
+  color: var(--bg);
+}
+
+.coupon-input-group button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.coupon-error {
+  font-size: 12px;
+  color: #ff4444;
+  margin-bottom: 8px;
+  animation: slideDown 0.3s ease;
+}
+
+.coupon-success {
+  font-size: 12px;
+  color: #00aa44;
+  margin-bottom: 0;
+  animation: slideDown 0.3s ease;
+}
+
+/* ============ CHECKOUT SUMMARY ============ */
+
+.checkout-summary {
+  margin-top: 20px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  background: var(--bg-elev);
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  font-size: 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.summary-row.discount {
+  color: #00aa44;
+}
+
+.summary-row.total {
+  padding: 12px 0;
+  font-weight: 600;
+  font-size: 16px;
+  border: none;
+  margin-bottom: 12px;
+}
+
+.btn-secondary {
+  padding: 10px 20px;
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--text);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--text);
+  color: var(--bg);
+}
+
+/* ============ PROMOTIONAL STRIP ============ */
+
+.promo-strip {
+  width: 100%;
+  padding: 20px;
+  background: var(--bg-elev);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  animation: promoSlideIn 0.6s ease;
+}
+
+.promo-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.promo-text {
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text);
+  margin: 0;
+  animation: promoFadeIn 0.8s ease 0.2s both;
+}
+
+.promo-link {
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--text);
+  border-bottom: 1px solid var(--text);
+  padding-bottom: 2px;
+  transition: all 0.3s ease;
+  animation: promoFadeIn 0.8s ease 0.4s both;
+}
+
+.promo-link:hover {
+  border-bottom-color: transparent;
+  transform: translateX(2px);
+}
+
+@media (max-width: 768px) {
+  .promo-strip {
+    padding: 16px;
+  }
+
+  .promo-content {
+    gap: 16px;
+  }
+
+  .promo-text {
+    font-size: 11px;
+  }
+
+  .promo-link {
+    font-size: 11px;
+  }
+
+  .coupon-input-group {
+    flex-direction: column;
+  }
+
+  .coupon-input-group button {
+    width: 100%;
+  }
+}
+
+/* ============ ANIMATIONS ============ */
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes promoSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes promoFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .main-content {
   min-height: 85vh;
   padding: 0 40px 80px;

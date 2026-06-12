@@ -168,6 +168,12 @@
   margin-bottom: 24px;
 }
 
+.checkout-summary .btn {
+  width: 100%;
+  height: 54px;
+  margin-top: 16px;
+}
+
 @media (max-width: 900px) {
   .cart-layout {
     grid-template-columns: 1fr;
