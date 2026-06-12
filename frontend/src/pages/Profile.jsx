@@ -25,8 +25,8 @@ const Profile = () => {
         } else {
           // Token obsolete or 401: clear and bounce
           if (res.status === 401) {
-             logout();
-             navigate('/login');
+            logout();
+            navigate('/login');
           }
           setOrders([]);
         }
@@ -109,8 +109,8 @@ const Profile = () => {
                 <p style={{ color: '#a1a1aa', fontSize: '0.9rem' }}>Total: <strong style={{ color: '#10b981' }}>₹{order.totalAmount.toFixed(2)}</strong></p>
               </div>
               <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
-                <span style={{ 
-                  background: order.status === 'Delivered' ? 'rgba(16,185,129,0.1)' : order.status === 'Shipped' ? 'rgba(59,130,246,0.1)' : 'rgba(245,158,11,0.1)', 
+                <span style={{
+                  background: order.status === 'Delivered' ? 'rgba(16,185,129,0.1)' : order.status === 'Shipped' ? 'rgba(59,130,246,0.1)' : 'rgba(245,158,11,0.1)',
                   color: order.status === 'Delivered' ? '#10b981' : order.status === 'Shipped' ? '#3b82f6' : '#f59e0b',
                   padding: '8px 16px', borderRadius: '20px', fontWeight: 'bold', whiteSpace: 'nowrap'
                 }}>
