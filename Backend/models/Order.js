@@ -10,6 +10,9 @@ const orderSchema = new mongoose.Schema({
     }
   ],
   totalAmount: { type: Number, required: true },
+  originalAmount: { type: Number },
+  discountAmount: { type: Number, default: 0 },
+  couponCode: { type: String },
   address: {
     fullName: { type: String, required: true },
     street: { type: String, required: true },

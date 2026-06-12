@@ -18,7 +18,7 @@ const Navbar = () => {
   const goToPage = (path) => {
     startTransition(path);
   };
-
+ 
   const handleLogout = () => {
     logout();
     startTransition("/login");
