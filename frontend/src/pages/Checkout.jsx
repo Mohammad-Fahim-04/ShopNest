@@ -104,12 +104,12 @@ const Checkout = () => {
               },
               body: JSON.stringify({
                 items: cartItems,
-                totalAmount: totalPrice,
-                address,
-                paymentId: response.razorpay_payment_id,
-                couponCode: appliedCoupon?.code || null,
+                originalAmount: totalPrice,
                 discountAmount: discountAmount,
-                finalAmount: finalAmount
+                couponCode: appliedCoupon?.code || null,
+                totalAmount: finalAmount,
+                address,
+                paymentId: response.razorpay_payment_id
               })
             });
 
@@ -149,12 +149,12 @@ const Checkout = () => {
       },
       body: JSON.stringify({
         items: cartItems,
-        totalAmount: totalPrice,
-        address,
-        paymentId: 'bypass_txn_' + Date.now(),
-        couponCode: appliedCoupon?.code || null,
+        originalAmount: totalPrice,
         discountAmount: discountAmount,
-        finalAmount: finalAmount
+        couponCode: appliedCoupon?.code || null,
+        totalAmount: finalAmount,
+        address,
+        paymentId: 'bypass_txn_' + Date.now()
       })
     });
     if (saveOrderRes.ok) {
@@ -174,71 +174,159 @@ const Checkout = () => {
   };
 
   return (
-    <div className="checkout-container">
-      <h2>Checkout</h2>
-      <div className="checkout-content">
-        <form onSubmit={handleSubmit} className="shipping-form">
-          <h3>Shipping Address</h3>
-          <input type="text" placeholder="Full Name" required value={address.fullName} onChange={(e) => setAddress({...address, fullName: e.target.value})} />
-          <input type="text" placeholder="Street" required value={address.street} onChange={(e) => setAddress({...address, street: e.target.value})} />
-          <input type="text" placeholder="City" required value={address.city} onChange={(e) => setAddress({...address, city: e.target.value})} />
-          <input type="text" placeholder="Postal Code" required value={address.postalCode} onChange={(e) => setAddress({...address, postalCode: e.target.value})} />
-          <input type="text" placeholder="Country" required value={address.country} onChange={(e) => setAddress({...address, country: e.target.value})} />
+    <div className="checkout-wrapper">
+      {/* HEADER SECTION */}
+      <div className="checkout-header">
+        <div className="checkout-header-content">
+          <span className="checkout-label">/ Secure Checkout</span>
+          <h1 className="checkout-title">CHECKOUT</h1>
+          <p className="checkout-subtitle">Complete your purchase securely</p>
+        </div>
+      </div>
+
+      {/* MAIN CHECKOUT SECTION */}
+      <div className="checkout-container">
+        <form onSubmit={handleSubmit} className="checkout-layout">
           
-          <div className="coupon-section">
-            <h4>Apply Coupon (Optional)</h4>
-            <div className="coupon-input-group">
-              <input 
-                type="text" 
-                placeholder="Enter coupon code" 
-                value={couponCode}
-                onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
-                disabled={appliedCoupon !== null}
-              />
-              {appliedCoupon ? (
-                <button 
-                  type="button" 
-                  className="btn-secondary"
-                  onClick={removeCoupon}
-                >
-                  Remove
-                </button>
-              ) : (
-                <button 
-                  type="button" 
-                  className="btn-secondary"
-                  onClick={validateCoupon}
-                  disabled={couponLoading}
-                >
-                  {couponLoading ? 'Validating...' : 'Apply'}
-                </button>
-              )}
+          {/* LEFT COLUMN - SHIPPING FORM */}
+          <div className="checkout-form">
+            <div className="form-section">
+              <h2 className="form-title">Shipping Address</h2>
+              
+              <div className="form-group">
+                <input 
+                  type="text" 
+                  placeholder="Full Name" 
+                  required 
+                  value={address.fullName} 
+                  onChange={(e) => setAddress({...address, fullName: e.target.value})}
+                  className="form-input"
+                />
+              </div>
+
+              <div className="form-group">
+                <input 
+                  type="text" 
+                  placeholder="Street Address" 
+                  required 
+                  value={address.street} 
+                  onChange={(e) => setAddress({...address, street: e.target.value})}
+                  className="form-input"
+                />
+              </div>
+
+              <div className="form-row">
+                <div className="form-group">
+                  <input 
+                    type="text" 
+                    placeholder="City" 
+                    required 
+                    value={address.city} 
+                    onChange={(e) => setAddress({...address, city: e.target.value})}
+                    className="form-input"
+                  />
+                </div>
+                <div className="form-group">
+                  <input 
+                    type="text" 
+                    placeholder="Postal Code" 
+                    required 
+                    value={address.postalCode} 
+                    onChange={(e) => setAddress({...address, postalCode: e.target.value})}
+                    className="form-input"
+                  />
+                </div>
+              </div>
+
+              <div className="form-group">
+                <input 
+                  type="text" 
+                  placeholder="Country" 
+                  required 
+                  value={address.country} 
+                  onChange={(e) => setAddress({...address, country: e.target.value})}
+                  className="form-input"
+                />
+              </div>
             </div>
-            {couponError && <p className="coupon-error">{couponError}</p>}
-            {appliedCoupon && (
-              <p className="coupon-success">
-                ✓ Coupon applied! Discount: ₹{appliedCoupon.discountAmount.toFixed(2)}
-              </p>
-            )}
           </div>
 
-          <div className="checkout-summary">
-            <div className="summary-row">
-              <span>Subtotal:</span>
-              <span>₹{totalPrice.toFixed(2)}</span>
-            </div>
-            {discountAmount > 0 && (
-              <div className="summary-row discount">
-                <span>Discount:</span>
-                <span>-₹{discountAmount.toFixed(2)}</span>
+          {/* RIGHT COLUMN - ORDER SUMMARY */}
+          <div className="order-summary-box">
+            <h2 className="summary-title">Order Summary</h2>
+
+            {/* COUPON SECTION */}
+            <div className="coupon-section-checkout">
+              <h3 className="coupon-heading">Apply Coupon</h3>
+              <div className="coupon-input-wrapper">
+                <input 
+                  type="text" 
+                  placeholder="Enter code" 
+                  value={couponCode}
+                  onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
+                  disabled={appliedCoupon !== null}
+                  className="coupon-input-checkout"
+                />
+                {appliedCoupon ? (
+                  <button 
+                    type="button" 
+                    className="coupon-btn-remove"
+                    onClick={removeCoupon}
+                  >
+                    REMOVE
+                  </button>
+                ) : (
+                  <button 
+                    type="button" 
+                    className="coupon-btn-apply"
+                    onClick={validateCoupon}
+                    disabled={couponLoading}
+                  >
+                    {couponLoading ? 'Validating...' : 'APPLY'}
+                  </button>
+                )}
               </div>
-            )}
-            <div className="summary-row total">
-              <span>Total to Pay:</span>
-              <span>₹{finalAmount.toFixed(2)}</span>
+              {couponError && <p className="coupon-error-message">{couponError}</p>}
+              {appliedCoupon && (
+                <p className="coupon-success-message">
+                  ✓ Coupon applied! Discount: ₹{appliedCoupon.discountAmount.toFixed(2)}
+                </p>
+              )}
             </div>
-            <button type="submit" className="btn">Pay Now</button>
+
+            {/* SUMMARY BREAKDOWN */}
+            <div className="summary-breakdown">
+              <div className="summary-line">
+                <span className="summary-label">Subtotal</span>
+                <span className="summary-value">₹{totalPrice.toFixed(2)}</span>
+              </div>
+
+              <div className="summary-line">
+                <span className="summary-label">Shipping</span>
+                <span className="summary-value free">FREE</span>
+              </div>
+
+              {discountAmount > 0 && (
+                <div className="summary-line discount-line">
+                  <span className="summary-label">Discount</span>
+                  <span className="summary-value discount-value">-₹{discountAmount.toFixed(2)}</span>
+                </div>
+              )}
+
+              <div className="summary-divider"></div>
+
+              <div className="summary-line total-line">
+                <span className="summary-label">Total</span>
+                <span className="summary-value total-value">₹{finalAmount.toFixed(2)}</span>
+              </div>
+            </div>
+
+            {/* PAYMENT BUTTON */}
+            <button type="submit" className="checkout-btn">
+              PAY ₹{finalAmount.toFixed(2)}
+            </button>
           </div>
+
         </form>
       </div>
     </div>

@@ -67,7 +67,7 @@ const Home = () => {
       </section>
 
       {/* PROMOTIONAL STRIP */}
-      <section className="promo-strip">
+      <section className="promo-strip coupon-strip">
         <div className="promo-content">
           <p className="promo-text">
             SAVE10 • 10% OFF YOUR FIRST ORDER • FREE SHIPPING OVER ₹999

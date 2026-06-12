@@ -303,6 +303,50 @@ button {
   }
 }
 
+/* ============ PREMIUM SHINE ANIMATION ============ */
+
+@keyframes premiumShine {
+  0% {
+    left: -100%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+.coupon-strip {
+  position: relative;
+  overflow: hidden;
+}
+
+.coupon-strip::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 20%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0.15) 80%,
+    transparent 100%
+  );
+  animation: premiumShine 5.5s infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
 .main-content {
   min-height: 85vh;
   padding: 0 40px 80px;
