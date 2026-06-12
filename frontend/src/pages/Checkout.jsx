@@ -98,7 +98,7 @@ const Checkout = () => {
           if (verifyRes.ok) {
             const saveOrderRes = await fetch('/api/orders', {
               method: 'POST',
-              headers: { 
+              headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${user.token}`
               },
@@ -132,7 +132,7 @@ const Checkout = () => {
           color: '#f97316'
         }
       };
-      
+
       const rzp1 = new window.Razorpay(options);
       rzp1.open();
     } catch (error) {
@@ -143,7 +143,7 @@ const Checkout = () => {
   const bypassPayment = async () => {
     const saveOrderRes = await fetch('/api/orders', {
       method: 'POST',
-      headers: { 
+      headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${user.token}`
       },
@@ -187,64 +187,64 @@ const Checkout = () => {
       {/* MAIN CHECKOUT SECTION */}
       <div className="checkout-container">
         <form onSubmit={handleSubmit} className="checkout-layout">
-          
+
           {/* LEFT COLUMN - SHIPPING FORM */}
           <div className="checkout-form">
             <div className="form-section">
               <h2 className="form-title">Shipping Address</h2>
-              
+
               <div className="form-group">
-                <input 
-                  type="text" 
-                  placeholder="Full Name" 
-                  required 
-                  value={address.fullName} 
-                  onChange={(e) => setAddress({...address, fullName: e.target.value})}
+                <input
+                  type="text"
+                  placeholder="Full Name"
+                  required
+                  value={address.fullName}
+                  onChange={(e) => setAddress({ ...address, fullName: e.target.value })}
                   className="form-input"
                 />
               </div>
 
               <div className="form-group">
-                <input 
-                  type="text" 
-                  placeholder="Street Address" 
-                  required 
-                  value={address.street} 
-                  onChange={(e) => setAddress({...address, street: e.target.value})}
+                <input
+                  type="text"
+                  placeholder="Street Address"
+                  required
+                  value={address.street}
+                  onChange={(e) => setAddress({ ...address, street: e.target.value })}
                   className="form-input"
                 />
               </div>
 
               <div className="form-row">
                 <div className="form-group">
-                  <input 
-                    type="text" 
-                    placeholder="City" 
-                    required 
-                    value={address.city} 
-                    onChange={(e) => setAddress({...address, city: e.target.value})}
+                  <input
+                    type="text"
+                    placeholder="City"
+                    required
+                    value={address.city}
+                    onChange={(e) => setAddress({ ...address, city: e.target.value })}
                     className="form-input"
                   />
                 </div>
                 <div className="form-group">
-                  <input 
-                    type="text" 
-                    placeholder="Postal Code" 
-                    required 
-                    value={address.postalCode} 
-                    onChange={(e) => setAddress({...address, postalCode: e.target.value})}
+                  <input
+                    type="text"
+                    placeholder="Postal Code"
+                    required
+                    value={address.postalCode}
+                    onChange={(e) => setAddress({ ...address, postalCode: e.target.value })}
                     className="form-input"
                   />
                 </div>
               </div>
 
               <div className="form-group">
-                <input 
-                  type="text" 
-                  placeholder="Country" 
-                  required 
-                  value={address.country} 
-                  onChange={(e) => setAddress({...address, country: e.target.value})}
+                <input
+                  type="text"
+                  placeholder="Country"
+                  required
+                  value={address.country}
+                  onChange={(e) => setAddress({ ...address, country: e.target.value })}
                   className="form-input"
                 />
               </div>
@@ -259,25 +259,25 @@ const Checkout = () => {
             <div className="coupon-section-checkout">
               <h3 className="coupon-heading">Apply Coupon</h3>
               <div className="coupon-input-wrapper">
-                <input 
-                  type="text" 
-                  placeholder="Enter code" 
+                <input
+                  type="text"
+                  placeholder="Enter code"
                   value={couponCode}
                   onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
                   disabled={appliedCoupon !== null}
                   className="coupon-input-checkout"
                 />
                 {appliedCoupon ? (
-                  <button 
-                    type="button" 
+                  <button
+                    type="button"
                     className="coupon-btn-remove"
                     onClick={removeCoupon}
                   >
                     REMOVE
                   </button>
                 ) : (
-                  <button 
-                    type="button" 
+                  <button
+                    type="button"
                     className="coupon-btn-apply"
                     onClick={validateCoupon}
                     disabled={couponLoading}

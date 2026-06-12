@@ -10,17 +10,17 @@ connectDB();
 const app = express();
 
 app.use(cors(
-   {
-    origin : ['http://localhost:3000', 'http://127.0.0.1:3000'],
-    credentials : true
-   }
+    {
+        origin: ['http://localhost:3000', 'http://127.0.0.1:3000'],
+        credentials: true
+    }
 ));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api/analytics", analyticsRoutes);
 
 
-app.get("/", (req,res)=> {
+app.get("/", (req, res) => {
     res.send("shopnest backend is working properly");
 })
 
@@ -31,7 +31,7 @@ app.use('/api/payments', require('./routes/paymentRoutes'));
 app.use('/api/coupons', require('./routes/couponRoutes'));
 app.use('/api/analytics', require('./routes/analyticsRoutes'));
 
-const Port = process.env.PORT || 5000;      
+const Port = process.env.PORT || 5000;
 app.listen(Port, () => {
     console.log(`Server is running on port ${Port}`);
 })
