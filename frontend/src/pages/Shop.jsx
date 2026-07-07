@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ProductCard from '../components/ProductCard';
 import '../styles/product.css';
+import { getApiUrl } from '../utils/api';
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
@@ -15,7 +16,7 @@ const Shop = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        let url = '/api/products?';
+        let url = getApiUrl('/api/products?');
 
         if (search) url += `search=${search}&`;
         if (category) url += `category=${category}&`;

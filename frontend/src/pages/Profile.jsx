@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
+import { getApiUrl } from '../utils/api';
 
 const Profile = () => {
   const { user, logout } = useContext(AuthContext);
@@ -16,7 +17,7 @@ const Profile = () => {
     }
     const fetchMyOrders = async () => {
       try {
-        const res = await fetch('/api/orders/myorders', {
+        const res = await fetch(getApiUrl('/api/orders/myorders'), {
           headers: { Authorization: `Bearer ${user.token}` }
         });
         const data = await res.json();
@@ -47,7 +48,7 @@ const Profile = () => {
   const downloadInvoice = async (orderId) => {
     try {
       setDownloadingId(orderId);
-      const res = await fetch(`/api/orders/${orderId}/invoice`, {
+      const res = await fetch(getApiUrl(`/api/orders/${orderId}/invoice`), {
         headers: { Authorization: `Bearer ${user.token}` }
       });
 

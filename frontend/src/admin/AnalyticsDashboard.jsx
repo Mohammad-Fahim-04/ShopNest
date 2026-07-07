@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
+import { getApiUrl } from "../utils/api";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -49,7 +50,7 @@ const AnalyticsDashboard = () => {
         const token = user?.token;
 
         const { data } = await axios.get(
-          "http://localhost:5000/api/analytics/summary",
+          getApiUrl("/api/analytics/summary"),
           {
             headers: {
               Authorization: `Bearer ${token}`,

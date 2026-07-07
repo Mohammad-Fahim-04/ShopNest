@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
 import { Link } from "react-router-dom";
+import { getApiUrl } from "../utils/api";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -9,7 +10,7 @@ const Home = () => {
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch("/api/products");
+        const res = await fetch(getApiUrl("/api/products"));
 
         if (!res.ok) throw new Error("Failed");
 
